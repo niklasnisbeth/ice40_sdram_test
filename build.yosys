@@ -1,0 +1,2 @@
+read_verilog micron16m16/autorefresh_counter.v micron16m16/delay_gen150us.v micron16m16/lfsr_count255.v micron16m16/lfsr_count64.v micron16m16/sdram_control_fsm.v micron16m16/sdram_controller.v micron16m16/sdram_defines.v sdram_test.v
+synth_ice40
