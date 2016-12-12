@@ -68,6 +68,7 @@ module sdram_controller (/*AUTOARG*/
                          //HUSK io_sdram_dq,
                          i_sdram_dq,
                          o_sdram_dq,
+                         o_sdram_busdir,
 
                          // Inputs
                          i_addr, i_adv, i_clk, i_rst, i_rwn, 
@@ -232,6 +233,7 @@ module sdram_controller (/*AUTOARG*/
     //HUSK inout [31:0]                    io_sdram_dq;            // To/From U0 of sdram_control_fsm.v
     input [31:0]                    i_sdram_dq;
     output [31:0]                   o_sdram_dq;
+    output                          o_sdram_busdir; //HUSK
     
     wire                            delay_done150us_i;     // To U0 of sdram_control_fsm.v
     wire                            refresh_count_done_i;   // From U2 of autorefresh_counter.v
@@ -297,6 +299,7 @@ module sdram_controller (/*AUTOARG*/
                           .o_data          (cpu_dataout_i[CPU_DATA_WIDTH-1:0]),
                           .o_den           (cpu_den_i),
                           //HUSK .io_sdram_dq          (io_sdram_dq[SDRAM_DATA_WIDTH-1:0]),
+                          .o_sdram_busdir     (o_sdram_busdir), //HUSK
                           .o_sdram_dq          (o_sdram_dq[SDRAM_DATA_WIDTH-1:0]),
                           .i_sdram_dq          (i_sdram_dq[SDRAM_DATA_WIDTH-1:0]), 
                           // Inputs

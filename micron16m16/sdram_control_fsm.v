@@ -81,6 +81,7 @@ module sdram_control_fsm (
                           o_sdram_blkaddr,     // sdr bank address
                           o_sdram_addr,       // sdr address
                           //HUSK io_sdram_dq,       // sdr data
+                          o_sdram_busdir, //HUSK
                           o_sdram_dq,
                           i_sdram_dq,
                           o_sdram_dqm,       // sdr data
@@ -154,6 +155,7 @@ module sdram_control_fsm (
     output                          o_data_valid;
     output [SDRAM_DQM_WIDTH-1:0]    o_sdram_dqm;
     output                          o_data_req;
+    output                          o_sdram_busdir; //HUSK
 
     output                           o_write_done;
     output                           o_read_done;
@@ -674,6 +676,7 @@ module sdram_control_fsm (
      * Tristate/Enabling of SDRAM Data bus based on read/write operation
      ******************************************************************************/
     assign #WIREDLY o_sdram_dq = i_data; //HUSK (sdram_dq_en_i) ? i_data/*cpu_data_reg_i*/  : {`SDRAM_DBUS_LEN{1'bz}};//cpu2sdram_reg_i : {`SDRAM_DBUS_LEN{1'bz}};
+    assign o_sdram_busdir = sdram_dq_en_i;
 
     /*******************************************************************************
      * Registering input data and then fed to SDRAM bus for write
